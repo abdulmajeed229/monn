@@ -15,14 +15,15 @@ function LoginMyAccount() {
     function handleLogin() {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential: UserCredential) => {
-                // Using the user object for additional logic
-                localStorage.setItem('user', JSON.stringify(userCredential.user));
+                // Optional: Use the user object
+                console.log("Logged-in User:", userCredential.user);
+                localStorage.setItem('user', 'true');
                 alert("Login Success");
                 router.push('/home');
             })
             .catch((error: { message: string }) => {
                 alert(error.message);
-                router.push('/login'); // Correctly navigates to login instead of rendering a Link
+                router.push('/login'); // Navigate instead of rendering Link
             });
     }
 
