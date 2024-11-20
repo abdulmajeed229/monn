@@ -36,9 +36,7 @@ function CreateAcount() {
                 localStorage.setItem('user' , 'user')
                 router.push('/home');
             })
-            .catch((error) => {
-                alert(error.message);
-            });
+        
     }
 
     // Handle password reset
