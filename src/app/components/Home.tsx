@@ -2,7 +2,7 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import HomeCenter from '../components/homecontent';
-import Footer from '../components/footer';
+
 
 function Home(){
 
