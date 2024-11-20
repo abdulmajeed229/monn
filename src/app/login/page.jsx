@@ -1,6 +1,6 @@
 "use client";
 
-import { signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { useState } from "react";
 import { auth } from '@/Database/firebase.config';
@@ -9,21 +9,24 @@ import { useRouter } from 'next/navigation';
 function LoginMyAccount() {
     const router = useRouter();
 
-    const [email, setEmail] = useState<string>(""); // Explicitly typed as string
-    const [password, setPassword] = useState<string>(""); // Explicitly typed as string
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     function handleLogin() {
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential: UserCredential) => {
-                // Optional: Use the user object
+            .then((userCredential) => {
+                // Optional: Log user data for debugging or remove this line
                 console.log("Logged-in User:", userCredential.user);
+
+                // Save login status and navigate to home page
                 localStorage.setItem('user', 'true');
                 alert("Login Success");
                 router.push('/home');
             })
-            .catch((error: { message: string }) => {
+            .catch((error) => {
+                // Show error message to the user
                 alert(error.message);
-                router.push('/login'); // Navigate instead of rendering Link
+                router.push('/login'); // Navigate to login page
             });
     }
 
@@ -34,6 +37,7 @@ function LoginMyAccount() {
 
                 <input
                     type="email"
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     className="h-12 w-full px-3 border-b border-orange-200 outline-none rounded mb-4"
@@ -41,6 +45,7 @@ function LoginMyAccount() {
 
                 <input
                     type="password"
+                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
                     className="h-12 w-full px-3 border-b border-orange-200 outline-none rounded mb-4"
@@ -55,7 +60,7 @@ function LoginMyAccount() {
 
                 <div className="flex gap-20 mt-5 justify-evenly">
                     <Link href={'/'}>
-                        <button>Create account</button>
+                        <button>Create Account</button>
                     </Link>
                     <button>Forget Password</button>
                 </div>
