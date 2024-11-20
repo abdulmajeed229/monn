@@ -47,9 +47,7 @@ function CreateAcount() {
             alert("Password reset email sent!");
             setShowResetModal(false); // Close the modal
             setResetEmail(""); // Clear email input field
-        } catch (error) {
-            alert("Failed");
-        }
+        } 
     };
 
     return (
